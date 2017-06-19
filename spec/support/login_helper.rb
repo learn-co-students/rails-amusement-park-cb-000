@@ -63,6 +63,7 @@ module LoginHelper
         height: 58,
         admin: true
       )
+      
     fill_in("user[name]", :with => "Walt Disney")
     fill_in("user[password]", :with => "password")
     click_button('Sign In')
