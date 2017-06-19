@@ -1,4 +1,5 @@
 require_relative "../rails_helper.rb"
+require 'pry'
 
 describe 'Feature Test: User Signup', :type => :feature do
 
@@ -71,6 +72,7 @@ describe 'Feature Test: User Signup', :type => :feature do
     visit_signin
     expect(current_path).to eq('/signin')
     admin_login
+    
     expect(current_path).to eq('/users/2')
     expect(page).to have_content("Walt Disney")
     expect(page).to have_content("ADMIN")
