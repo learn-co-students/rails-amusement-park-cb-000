@@ -23,11 +23,31 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-           <!--  nav here -->
+           <% if current_user %>
+            <li class="nav-link">
+              <%= link_to "See attractions", attractions_path %>
+            </li>
+            <li class="nav-link">
+              <%= link_to "Log Out", signout_path %>
+            </li>
+           <% else %>
+            <li class="nav-link">
+              <%= link_to "Sign In", signin_path %>
+            </li>
+            <li class="nav-link">
+              <%= link_to "Sign Up", new_user_path %>
+            </li>
+           <% end %>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
+
+    <% if flash[:notice] %>
+    <div class="alert alert-success" role="alert">
+      <%= flash[:notice] %>
+    </div>
+    <% end %>
 
     <!-- content -->
     <div class="container"  role="main">
