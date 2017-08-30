@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
- resource :users, only: [:index, :new, :create, :edit, :update]
- get '/users/:id', to: 'users#show'
- resource :sessions, only: [:create]
+ resources :users
+ resources :attractions
+ resource :sessions
 
  get '/signin', to: 'sessions#new'
+ post '/signin', to: 'sessions#create'
+ delete '/logout', to: 'sessions#destroy'
  get '/welcome/home', to: 'welcome#home'
  root 'welcome#home'
 end

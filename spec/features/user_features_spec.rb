@@ -1,5 +1,5 @@
 require_relative "../rails_helper.rb"
-
+=begin
 describe 'Feature Test: User Signup', :type => :feature do
 
   it 'successfully signs up as non-admin' do
@@ -126,7 +126,7 @@ describe 'Feature Test: User Signout', :type => :feature do
     expect(page.get_rack_session).to_not include("user_id")
   end
 end
-
+=end
 describe 'Feature Test: Go on a Ride', :type => :feature do
 
   before :each do
@@ -154,7 +154,7 @@ describe 'Feature Test: Go on a Ride', :type => :feature do
     visit_signup
     user_signup
   end
-
+=begin
   it 'has a link from the user show page to the attractions index page' do
     expect(page).to have_content("See attractions")
     click_link('See attractions')
@@ -211,7 +211,7 @@ describe 'Feature Test: Go on a Ride', :type => :feature do
     click_button("Go on this ride")
     expect(current_path).to eq("/users/1")
   end
-
+=end
   it "clicking on 'Go on this ride' updates the users ticket number" do
     click_link('See attractions')
     click_link("Go on #{@ferriswheel.name}")
