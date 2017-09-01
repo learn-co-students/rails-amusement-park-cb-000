@@ -5,7 +5,6 @@ class AttractionsController < ApplicationController
   end
 
   def create
-  #  binding.pry
     if current_user.admin?
       @attraction = Attraction.create(attraction_params)
       redirect_to "/attractions/#{@attraction.id}"
@@ -21,7 +20,6 @@ class AttractionsController < ApplicationController
   end
 
   def show
-    #binding.pry
     @attraction = Attraction.find(params[:id])
     @user = current_user
 

@@ -10,36 +10,27 @@ class UsersController < ApplicationController
   end
 
   def create
-
-
     @user = User.create(user_params)
     if @user.present?
-    session[:user_id] = @user.id
-
-     redirect_to "/users/#{@user.id}"
-   else
-
-     flash[:alert] = "Could not create account."
-     redirect_to "/users/new"
-   end
+      session[:user_id] = @user.id
+      redirect_to "/users/#{@user.id}"
+    else
+      flash[:alert] = "Could not create account."
+      redirect_to "/users/new"
+    end
   end
 
   def show
 
     if current_user
-    @user = User.find(params[:id])
+      @user = User.find(params[:id])
       if params[:attraction].present?
         @attraction =  Attraction.find(params[:attraction][:id])
         @ride = Ride.create(user_id: @user.id, attraction_id: @attraction.id)
-
-      flash[:notice] = @ride.take_ride
+        flash[:notice] = @ride.take_ride
         @user = @ride.user
         @user.save
-
-
-
       end
-
     else
       redirect_to root_path
     end
