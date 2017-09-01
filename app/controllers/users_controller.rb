@@ -28,15 +28,18 @@ class UsersController < ApplicationController
 
     if current_user
     @user = User.find(params[:id])
-binding.pry
       if params[:attraction].present?
         @attraction =  Attraction.find(params[:attraction][:id])
         @ride = Ride.create(user_id: @user.id, attraction_id: @attraction.id)
 
-        @ride.take_ride
+      flash[:notice] = @ride.take_ride
+        @user = @ride.user
         @user.save
+
+
+
       end
-binding.pry
+
     else
       redirect_to root_path
     end

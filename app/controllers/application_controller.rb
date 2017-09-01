@@ -8,4 +8,9 @@ class ApplicationController < ActionController::Base
   def current_user
     User.find(session[:user_id]) unless session[:user_id].nil?
   end
+
+  def admin?
+    current_user.admin?
+  end
+  
 end
