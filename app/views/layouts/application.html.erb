@@ -24,6 +24,7 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
            <!--  nav here -->
+           <%= render partial: 'layouts/navigation' %>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -31,7 +32,12 @@
 
     <!-- content -->
     <div class="container"  role="main">
-      <%= yield %>
+      <% if !session[:user_id] %>
+        <h1>Welcome to the Amusement Park</h1>
+      <%end%>
+      <%=yield%>
+      <%= render partial: 'layouts/messages' %>
+
     </div>
 
   </body>
