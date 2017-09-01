@@ -1,2 +1,6 @@
-<%= link_to "Sign Up", new_user_path %>
+<ul class="nav">
+  <%= link_to "Sign Up", new_user_path %>
 <%= link_to "Sign In", signin_path %>
+<% if session[:user_id] %>
+  <%= link_to "Sign Out", logout_path, method: :delete %>
+  <%end%>

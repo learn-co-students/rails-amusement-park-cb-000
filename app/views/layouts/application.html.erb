@@ -32,9 +32,12 @@
 
     <!-- content -->
     <div class="container"  role="main">
-
+      <% if !session[:user_id] %>
+        <h1>Welcome to the Amusement Park</h1>
+      <%end%>
       <%=yield%>
       <%= render partial: 'layouts/messages' %>
+
     </div>
 
   </body>
