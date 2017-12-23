@@ -23,3 +23,15 @@ body {
   padding-top: 70px;
   padding-bottom: 30px;
 }
+
+table {
+  text-align: center;
+  tr, td, th {
+    padding: 10px;
+    border: solid 1px black;
+  }
+}
+
+.admin-options {
+  margin-bottom: 3.5%;
+}

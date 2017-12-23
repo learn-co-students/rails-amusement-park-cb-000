@@ -25,6 +25,8 @@ gem 'spring',        group: :development
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'slim-rails'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
@@ -38,8 +40,8 @@ group :test, :development do
   gem "rspec-rails"
   gem "capybara"
   gem "selenium-webdriver"
-  gem "better_errors"
-  gem "sprockets_better_errors"
+  # gem "better_errors"
+  # gem "sprockets_better_errors"
   gem "binding_of_caller"
   gem "factory_girl_rails"
   gem "simplecov"
