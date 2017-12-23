@@ -1,0 +1,22 @@
+- if current_user.admin
+  = render 'admin_options'
+
+table  
+  thead
+    tr
+      th Name 
+      th Tickets 
+      th Nausea rating
+      th Happiness rating
+      th Min Height
+      th Details
+
+  tbody
+    - @attractions.each do |attraction|
+      tr
+        td= attraction.name
+        td= attraction.tickets
+        td= attraction.nausea_rating
+        td= attraction.happiness_rating
+        td= attraction.min_height
+        td= link_to (current_user.admin ? "Show #{attraction.name}" : "Go on #{attraction.name}"), attraction_path(attraction)

@@ -1,0 +1,27 @@
+= form_for(@user) do |f|
+  h3 Personal
+  = f.label :name
+  = f.text_field :name
+  br
+  = f.label :password
+  = f.password_field :password
+  
+  h3 Details
+
+  = f.label :height
+  = f.number_field :height
+  br
+  = f.label :happiness
+  = f.number_field :happiness
+  br
+  = f.label :nausea
+  = f.number_field :nausea
+  br
+  = f.label :tickets
+  = f.number_field :tickets
+  br
+  = f.label :admin 
+  = f.check_box :admin
+  br
+  br
+  = f.submit
