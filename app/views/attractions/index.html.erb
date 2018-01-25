@@ -1,0 +1,7 @@
+<h2>Attractions </h2>
+
+<% if current_user.admin?  %>
+  <%= link_to "New Attraction", new_attraction_path %><br><br>
+<% end %>
+
+<%= render :partial => "attraction_info", :collection => @attractions, :as => :attraction %>

@@ -1,0 +1,28 @@
+<% if flash[:notice].is_a?(Array) %>
+  <ul>
+    <% flash[:notice].each do |m| %>
+      <li><h3 style = 'color: green;'><%= m %></h3></li>
+    <% end %>
+  </ul>
+  <% elsif flash[:notice].is_a?(String) %>
+    <%= flash[:notice] %>
+<% end %>
+
+Name:
+<%= @user.name %><br>
+
+Mood:
+<%= @user.mood %><br>
+
+Tickets:
+<%= @user.tickets %><br>
+
+Height:
+<%= @user.height %><br>
+
+<% if @user.admin? %>
+  ADMIN
+<% end %>
+
+<%= link_to "See attractions", attractions_path %>
+<%= link_to "Log Out", session_path(@user), :method => :delete %>

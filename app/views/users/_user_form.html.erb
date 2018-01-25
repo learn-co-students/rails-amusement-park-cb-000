@@ -1,0 +1,39 @@
+<h2> New User </h2>
+
+<% if flash[:errors].present? %>
+   User cannot be saved due to the following errors:
+   <ul>
+      <% flash[:errors].each do |error|  %>
+         <li><%= error %></li>
+      <% end %>
+   </ul>
+<% end%>
+
+<%= form_for user  do |f| %>
+
+   <%= f.label :name  %> <br>
+   <%= f.text_field :name %><br>
+
+   <%= f.label :password %><br>
+   <%= f.password_field :password %><br>
+
+   <%= f.label :height, 'Height (in inches)' %> <br>
+   <%= f.number_field :height %> <br>
+
+   <%= f.label :happiness, 'Rate your happiness (1-5):' %> <br>
+   <%= f.number_field :happiness, :min => 1, :max => 5 %> <br>
+
+   <%= f.label :nausea, 'Rate your nausea (1-5):' %><br>
+   <%= f.number_field :nausea, :min => 1, :max => 5 %><br>
+
+   <%= f.label :tickets, 'How many dollars you have in your pocket?' %><br>
+   <%= f.number_field :tickets %><br>
+
+   <%= f.label 'Check box if you are a theme park owner: ' %><br>
+   <%= f.check_box :admin %><br>
+
+   <%= f.submit "Create User" %><br>
+
+   <%= link_to 'Back', root_path %>
+
+<% end %>
