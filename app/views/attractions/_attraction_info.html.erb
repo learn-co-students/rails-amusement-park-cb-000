@@ -1,0 +1,19 @@
+<table>
+  <tr><td><p style = "display: inline; font-weight: bold; " >Name:</h3></td><td><%= attraction.name %></td><tr>
+  <tr><td><p style = "display: inline; font-weight: bold; " >Nausea rating:</h3></td><td><%= attraction.nausea_rating %></td><tr>
+  <tr><td><p style = "display: inline; font-weight: bold; " >Happiness rating:</h3></td><td><%= attraction.happiness_rating %></td><tr>
+  <tr><td><p style = "display: inline; font-weight: bold; " >Minimum height:</h3></td><td><%= attraction.min_height %></td><tr>
+  <tr><td><p style = "display: inline; font-weight: bold; " >Tickets:</ h3></td><td><%= attraction.tickets %></td><tr>
+  <tr>
+  <% if current_user.admin? %>
+    <%= link_to "Edit Attraction", edit_attraction_path(attraction.id) %>|
+    <%= link_to 'delete', attractions_path(attraction.id), :method => :delete, :onclick => "return confirm('Are you sure to delete attraction?')" %>|
+    <%= link_to "Show #{attraction.name}", attraction_path(attraction) %>
+  <% end %>
+  </tr>
+  <% if !current_user.admin? %>
+    <%= link_to "Go on #{attraction.name}", attraction_path(attraction.id) %><br>
+    <%= button_to "Go on this ride", go_on_ride_path(attraction.id), :method => :post %><br>
+  <% end %>
+</table>
+<br>

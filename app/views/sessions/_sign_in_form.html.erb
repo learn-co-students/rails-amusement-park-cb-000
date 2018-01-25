@@ -1,0 +1,14 @@
+<h2>Sign in </h2>
+
+<% if flash[:error] %>
+  <h3 style = "color: red;"><%= flash[:error] %></h3>
+<% end %>
+
+
+<%= form_for user, :url => '/sessions' , :method => :post do |f|  %>
+  <%= f.label :name %><br>
+  <%= f.text_field :name %><br>
+  <%= f.label :password %><br>
+  <%= f.password_field :password %><br>
+  <%= f.submit "Sign In" %>
+<% end %>
