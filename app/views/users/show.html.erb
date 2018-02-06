@@ -1,0 +1,20 @@
+<%flash.each do |name, msg|%>
+  <%=msg%>
+<%end%>
+
+Name: <%=@user.name %><br>
+
+Height: <%=@user.height%><br>
+
+Nausea: <%=@user.nausea%><br>
+
+Happiness: <%=@user.happiness%><br>
+
+Tickets: <%=@user.tickets%><br>
+
+Mood: <%=@user.mood%><br>
+
+ADMIN: <%=@user.admin%><br>
+
+<%=link_to "See attractions", attractions_path%><br>
+<%=link_to "Log Out", signout_path, method: "delete"%>
