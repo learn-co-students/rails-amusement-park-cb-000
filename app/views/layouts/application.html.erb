@@ -31,8 +31,10 @@
 
     <!-- content -->
     <div class="container"  role="main">
+      <%= content_tag(:div, flash[:alert], :id => "flash_alert") if flash[:alert] %>
       <%= yield %>
     </div>
+    <%= render :partial => 'layouts/navigation' %>
 
   </body>
 </html>

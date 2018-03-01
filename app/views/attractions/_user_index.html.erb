@@ -1,0 +1,7 @@
+<% @attractions.each do |attraction| %>
+  <%= link_to "Go on #{attraction.name}", attraction_path(attraction) %>
+  <br><br>
+<% end %>
+<%= form_tag ride_path, :method => 'post' do%>
+  <%= submit_tag "Go on this ride" %>
+<% end %>
