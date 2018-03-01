@@ -1,0 +1,7 @@
+<%= form_tag sessions_path, :method => "post" do %>
+<%= label_tag :name %>
+<%= text_field_tag :name %><br><br>
+<%= label_tag :password %>
+<%= password_field_tag :password %><br><br>
+<%= submit_tag "Sign In" %>
+<% end %>

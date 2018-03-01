@@ -1,0 +1,16 @@
+<h1>Welcome <%= current_user.name %></h1>
+<% if current_user.admin  %>
+  <h2>ADMIN</h2>
+<% end %>
+<br><br>
+<!-- <% if @message %>
+<%= @message %>
+<br><br>
+<% end %> -->
+<br><br>
+Mood: <%= current_user.mood %><br><br>
+Height: <%= current_user.height %><br><br>
+Tickets: <%= current_user.tickets %><br><br>
+<br><br>
+<%= link_to "See attractions", attractions_path %>
+<br><br>
