@@ -1,0 +1,1725 @@
+
+Feature Test: User Signup
+  successfully signs up as non-admin (FAILED - 1)
+  on sign up, successfully adds a session hash (FAILED - 2)
+  successfully logs in as non-admin (FAILED - 3)
+  on log in, successfully adds a session hash (FAILED - 4)
+  prevents user from viewing user show page and redirects to home page if not logged in (FAILED - 5)
+  successfully signs up as admin (FAILED - 6)
+  on sign up for admin, successfully adds a session hash (FAILED - 7)
+  successfully logs in as admin (FAILED - 8)
+  on log in, successfully adds a session hash to admins (FAILED - 9)
+
+Feature Test: User Signout
+  has a link to log out from the users/show page (FAILED - 10)
+  redirects to home page after logging out (FAILED - 11)
+  successfully destroys session hash when 'Log Out' is clicked (FAILED - 12)
+  has a link to log out from the users/show page when user is an admin (FAILED - 13)
+  redirects to home page after admin logs out when user is an admin (FAILED - 14)
+  successfully destroys session hash when 'Log Out' is clicked as admin (FAILED - 15)
+
+Feature Test: Go on a Ride
+  has a link from the user show page to the attractions index page (FAILED - 16)
+  links from the user show page to the attractions index page (FAILED - 17)
+  prevents users from editing/deleting/adding rides on the index page (FAILED - 18)
+  has titles of the rides on the attractions index page (FAILED - 19)
+  has links on the attractions index page to the attractions' show pages (FAILED - 20)
+  links from the attractions index page to the attractions' show pages (FAILED - 21)
+  prevents users from editing/deleting a ride on the show page (FAILED - 22)
+  has a button from the attraction show page to go on the ride (FAILED - 23)
+  clicking on 'Go on this ride' redirects to user show page (FAILED - 24)
+  clicking on 'Go on this ride' updates the users ticket number (FAILED - 25)
+  clicking on 'Go on this ride' updates the users mood (FAILED - 26)
+  when the user is tall enough and has enough tickets, clicking on 'Go on this ride' displays a thank you message (FAILED - 27)
+  when the user is too short, clicking on 'Go on this ride' displays a sorry message (FAILED - 28)
+  when the user doesn't have enough tickets, clicking on 'Go on this ride' displays a sorry message (FAILED - 29)
+  when the user is too short and doesn't have enough tickets, clicking on 'Go on this ride' displays a detailed sorry message (FAILED - 30)
+
+Feature Test: Admin Flow
+  displays admin when logged in as an admin on user show page (FAILED - 31)
+  links to the attractions from the users show page when logged in as a admin (FAILED - 32)
+  has a link from the user show page to the attractions index page when in admin mode (FAILED - 33)
+  allows admins to add an attraction from the index page (FAILED - 34)
+  allows admins to add an attraction (FAILED - 35)
+  has link to attraction/show from attraction/index page for admins (FAILED - 36)
+  does not suggest that admins go on a ride (FAILED - 37)
+  links to attractions/show page from attractions/index (FAILED - 38)
+  does not suggest that an admin go on a ride from attractions/show page (FAILED - 39)
+  has a link for admin to edit attraction from the attractions/show page (FAILED - 40)
+  links to attraction/edit page from attraction/show page when logged in as an admin (FAILED - 41)
+  updates an attraction when an admin edits it (FAILED - 42)
+
+Attraction
+  is valid with a name, min_height, nausea_rating, happiness_rating, and ticket number
+  has many rides
+  has many users through rides
+
+Ride
+  is valid with a user_id and a attraction_id
+  belongs to one attraction
+  belongs to one user
+  has a method 'take_ride' that accounts for the user not having enough tickets (FAILED - 43)
+  has a method 'take_ride' that accounts for the user not being tall enough (FAILED - 44)
+  has a method 'take_ride' that accounts for the user not being tall enough and not having enough tickets (FAILED - 45)
+  has a method 'take_ride' that updates ticket number
+  has a method 'take_ride' that updates the user's nausea
+  has a method 'take_ride' that updates the user's happiness
+
+User
+  is valid with a name, password, happiness, nausea, height, and tickets
+  is not valid without a password
+  is valid with an admin boolean (FAILED - 46)
+  defaults to admin => false (FAILED - 47)
+  has many rides
+  has many attractions through rides
+  has a method 'mood' that returns 'sad' when the user is more nauseous than happy
+  has a method 'mood' that returns 'happy' when the user is more happy than nauseous
+
+Failures:
+
+  1) Feature Test: User Signup successfully signs up as non-admin
+     Failure/Error: visit '/'
+
+     ActionController::RoutingError:
+       No route matches [GET] "/"
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+     # ./spec/support/login_helper.rb:4:in `visit_signup'
+     # ./spec/features/user_features_spec.rb:6:in `block (2 levels) in <top (required)>'
+
+  2) Feature Test: User Signup on sign up, successfully adds a session hash
+     Failure/Error: visit '/'
+
+     ActionController::RoutingError:
+       No route matches [GET] "/"
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+     # ./spec/support/login_helper.rb:4:in `visit_signup'
+     # ./spec/features/user_features_spec.rb:18:in `block (2 levels) in <top (required)>'
+
+  3) Feature Test: User Signup successfully logs in as non-admin
+     Failure/Error: visit '/'
+
+     ActionController::RoutingError:
+       No route matches [GET] "/"
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+     # ./spec/support/login_helper.rb:19:in `visit_signin'
+     # ./spec/features/user_features_spec.rb:24:in `block (2 levels) in <top (required)>'
+
+  4) Feature Test: User Signup on log in, successfully adds a session hash
+     Failure/Error: visit '/'
+
+     ActionController::RoutingError:
+       No route matches [GET] "/"
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+     # ./spec/support/login_helper.rb:19:in `visit_signin'
+     # ./spec/features/user_features_spec.rb:36:in `block (2 levels) in <top (required)>'
+
+  5) Feature Test: User Signup prevents user from viewing user show page and redirects to home page if not logged in
+     Failure/Error: expect(current_path).to eq('/')
+
+       expected: "/"
+            got: "/users/1"
+
+       (compared using ==)
+     # ./spec/features/user_features_spec.rb:51:in `block (2 levels) in <top (required)>'
+
+  6) Feature Test: User Signup successfully signs up as admin
+     Failure/Error: visit '/'
+
+     ActionController::RoutingError:
+       No route matches [GET] "/"
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+     # ./spec/support/login_helper.rb:4:in `visit_signup'
+     # ./spec/features/user_features_spec.rb:56:in `block (2 levels) in <top (required)>'
+
+  7) Feature Test: User Signup on sign up for admin, successfully adds a session hash
+     Failure/Error: visit '/'
+
+     ActionController::RoutingError:
+       No route matches [GET] "/"
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+     # ./spec/support/login_helper.rb:4:in `visit_signup'
+     # ./spec/features/user_features_spec.rb:65:in `block (2 levels) in <top (required)>'
+
+  8) Feature Test: User Signup successfully logs in as admin
+     Failure/Error: visit '/'
+
+     ActionController::RoutingError:
+       No route matches [GET] "/"
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+     # ./spec/support/login_helper.rb:19:in `visit_signin'
+     # ./spec/features/user_features_spec.rb:71:in `block (2 levels) in <top (required)>'
+
+  9) Feature Test: User Signup on log in, successfully adds a session hash to admins
+     Failure/Error: visit '/'
+
+     ActionController::RoutingError:
+       No route matches [GET] "/"
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+     # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+     # ./spec/support/login_helper.rb:19:in `visit_signin'
+     # ./spec/features/user_features_spec.rb:80:in `block (2 levels) in <top (required)>'
+
+  10) Feature Test: User Signout has a link to log out from the users/show page
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:90:in `block (2 levels) in <top (required)>'
+
+  11) Feature Test: User Signout redirects to home page after logging out
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:96:in `block (2 levels) in <top (required)>'
+
+  12) Feature Test: User Signout successfully destroys session hash when 'Log Out' is clicked
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:103:in `block (2 levels) in <top (required)>'
+
+  13) Feature Test: User Signout has a link to log out from the users/show page when user is an admin
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:110:in `block (2 levels) in <top (required)>'
+
+  14) Feature Test: User Signout redirects to home page after admin logs out when user is an admin
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:116:in `block (2 levels) in <top (required)>'
+
+  15) Feature Test: User Signout successfully destroys session hash when 'Log Out' is clicked as admin
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:123:in `block (2 levels) in <top (required)>'
+
+  16) Feature Test: Go on a Ride has a link from the user show page to the attractions index page
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:154:in `block (2 levels) in <top (required)>'
+
+  17) Feature Test: Go on a Ride links from the user show page to the attractions index page
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:154:in `block (2 levels) in <top (required)>'
+
+  18) Feature Test: Go on a Ride prevents users from editing/deleting/adding rides on the index page
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:154:in `block (2 levels) in <top (required)>'
+
+  19) Feature Test: Go on a Ride has titles of the rides on the attractions index page
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:154:in `block (2 levels) in <top (required)>'
+
+  20) Feature Test: Go on a Ride has links on the attractions index page to the attractions' show pages
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:154:in `block (2 levels) in <top (required)>'
+
+  21) Feature Test: Go on a Ride links from the attractions index page to the attractions' show pages
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:154:in `block (2 levels) in <top (required)>'
+
+  22) Feature Test: Go on a Ride prevents users from editing/deleting a ride on the show page
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:154:in `block (2 levels) in <top (required)>'
+
+  23) Feature Test: Go on a Ride has a button from the attraction show page to go on the ride
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:154:in `block (2 levels) in <top (required)>'
+
+  24) Feature Test: Go on a Ride clicking on 'Go on this ride' redirects to user show page
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:154:in `block (2 levels) in <top (required)>'
+
+  25) Feature Test: Go on a Ride clicking on 'Go on this ride' updates the users ticket number
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:154:in `block (2 levels) in <top (required)>'
+
+  26) Feature Test: Go on a Ride clicking on 'Go on this ride' updates the users mood
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:154:in `block (2 levels) in <top (required)>'
+
+  27) Feature Test: Go on a Ride when the user is tall enough and has enough tickets, clicking on 'Go on this ride' displays a thank you message
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:154:in `block (2 levels) in <top (required)>'
+
+  28) Feature Test: Go on a Ride when the user is too short, clicking on 'Go on this ride' displays a sorry message
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:154:in `block (2 levels) in <top (required)>'
+
+  29) Feature Test: Go on a Ride when the user doesn't have enough tickets, clicking on 'Go on this ride' displays a sorry message
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:154:in `block (2 levels) in <top (required)>'
+
+  30) Feature Test: Go on a Ride when the user is too short and doesn't have enough tickets, clicking on 'Go on this ride' displays a detailed sorry message
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:154:in `block (2 levels) in <top (required)>'
+
+  31) Feature Test: Admin Flow displays admin when logged in as an admin on user show page
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:292:in `block (2 levels) in <top (required)>'
+
+  32) Feature Test: Admin Flow links to the attractions from the users show page when logged in as a admin
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:292:in `block (2 levels) in <top (required)>'
+
+  33) Feature Test: Admin Flow has a link from the user show page to the attractions index page when in admin mode
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:292:in `block (2 levels) in <top (required)>'
+
+  34) Feature Test: Admin Flow allows admins to add an attraction from the index page
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:292:in `block (2 levels) in <top (required)>'
+
+  35) Feature Test: Admin Flow allows admins to add an attraction
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:292:in `block (2 levels) in <top (required)>'
+
+  36) Feature Test: Admin Flow has link to attraction/show from attraction/index page for admins
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:292:in `block (2 levels) in <top (required)>'
+
+  37) Feature Test: Admin Flow does not suggest that admins go on a ride
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:292:in `block (2 levels) in <top (required)>'
+
+  38) Feature Test: Admin Flow links to attractions/show page from attractions/index
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:292:in `block (2 levels) in <top (required)>'
+
+  39) Feature Test: Admin Flow does not suggest that an admin go on a ride from attractions/show page
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:292:in `block (2 levels) in <top (required)>'
+
+  40) Feature Test: Admin Flow has a link for admin to edit attraction from the attractions/show page
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:292:in `block (2 levels) in <top (required)>'
+
+  41) Feature Test: Admin Flow links to attraction/edit page from attraction/show page when logged in as an admin
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:292:in `block (2 levels) in <top (required)>'
+
+  42) Feature Test: Admin Flow updates an attraction when an admin edits it
+      Failure/Error: visit '/'
+
+      ActionController::RoutingError:
+        No route matches [GET] "/"
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:38:in `call_app'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `block in tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:26:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/tagged_logging.rb:68:in `tagged'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/rack/logger.rb:20:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/request_id.rb:21:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/methodoverride.rb:22:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/runtime.rb:18:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activesupport-4.2.10/lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/lock.rb:17:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/actionpack-4.2.10/lib/action_dispatch/middleware/static.rb:120:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/sendfile.rb:113:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/engine.rb:518:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/railties-4.2.10/lib/rails/application.rb:165:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:66:in `block in call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-1.6.11/lib/rack/urlmap.rb:50:in `call'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/mock_session.rb:30:in `request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:244:in `process_request'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/rack-test-0.6.3/lib/rack/test.rb:58:in `get'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:65:in `process'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:43:in `process_and_follow_redirects'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/browser.rb:23:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/rack_test/driver.rb:45:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/session.rb:265:in `visit'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/capybara-3.10.1/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/support/login_helper.rb:4:in `visit_signup'
+      # ./spec/features/user_features_spec.rb:292:in `block (2 levels) in <top (required)>'
+
+  43) Ride has a method 'take_ride' that accounts for the user not having enough tickets
+      Failure/Error: expect(ride.take_ride).to eq("Sorry. You do not have enough tickets to ride the #{attraction.name}.")
+
+        expected: "Sorry. You do not have enough tickets to ride the Roller Coaster."
+             got: "Sorry, you do not have enough tickets to ride the Roller Coaster."
+
+        (compared using ==)
+      # ./spec/models/ride_spec.rb:43:in `block (2 levels) in <top (required)>'
+
+  44) Ride has a method 'take_ride' that accounts for the user not being tall enough
+      Failure/Error: expect(ride.take_ride).to eq("Sorry. You are not tall enough to ride the #{attraction.name}.")
+
+        expected: "Sorry. You are not tall enough to ride the Roller Coaster."
+             got: "Sorry, you are not tall enough to ride the Roller Coaster."
+
+        (compared using ==)
+      # ./spec/models/ride_spec.rb:52:in `block (2 levels) in <top (required)>'
+
+  45) Ride has a method 'take_ride' that accounts for the user not being tall enough and not having enough tickets
+      Failure/Error: expect(ride.take_ride).to eq("Sorry. You do not have enough tickets to ride the #{attraction.name}. You are not tall enough to ride the #{attraction.name}.")
+
+        expected: "Sorry. You do not have enough tickets to ride the Roller Coaster. You are not tall enough to ride the Roller Coaster."
+             got: "Sorry, you are not tall enough to ride the Roller Coaster."
+
+        (compared using ==)
+      # ./spec/models/ride_spec.rb:61:in `block (2 levels) in <top (required)>'
+
+  46) User is valid with an admin boolean
+      Failure/Error:
+        User.create(
+          :name => "Walt",
+          :password => "password",
+          :nausea => 5,
+          :happiness => 3,
+          :tickets => 4,
+          :height => 34,
+          :admin => true
+        )
+
+      ActiveRecord::UnknownAttributeError:
+        unknown attribute 'admin' for User.
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activerecord-4.2.10/lib/active_record/attribute_assignment.rb:59:in `rescue in _assign_attribute'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activerecord-4.2.10/lib/active_record/attribute_assignment.rb:54:in `_assign_attribute'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activerecord-4.2.10/lib/active_record/attribute_assignment.rb:41:in `block in assign_attributes'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activerecord-4.2.10/lib/active_record/attribute_assignment.rb:35:in `each'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activerecord-4.2.10/lib/active_record/attribute_assignment.rb:35:in `assign_attributes'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activerecord-4.2.10/lib/active_record/core.rb:566:in `init_attributes'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activerecord-4.2.10/lib/active_record/core.rb:281:in `initialize'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activerecord-4.2.10/lib/active_record/inheritance.rb:61:in `new'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activerecord-4.2.10/lib/active_record/inheritance.rb:61:in `new'
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activerecord-4.2.10/lib/active_record/persistence.rb:33:in `create'
+      # ./spec/models/user_spec.rb:16:in `block (2 levels) in <top (required)>'
+      # ./spec/models/user_spec.rb:56:in `block (2 levels) in <top (required)>'
+      # ------------------
+      # --- Caused by: ---
+      # NoMethodError:
+      #   undefined method `admin=' for #<User:0x00000006bd2ff8>
+      #   /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activemodel-4.2.10/lib/active_model/attribute_methods.rb:433:in `method_missing'
+
+  47) User defaults to admin => false
+      Failure/Error: expect(user.admin).to eq(false)
+
+      NoMethodError:
+        undefined method `admin' for #<User:0x00000006b99078>
+      # /home/dapawn/.rvm/gems/ruby-2.3.3/gems/activemodel-4.2.10/lib/active_model/attribute_methods.rb:433:in `method_missing'
+      # ./spec/models/user_spec.rb:60:in `block (2 levels) in <top (required)>'
+
+Finished in 10.57 seconds (files took 2.02 seconds to load)
+62 examples, 47 failures
+
+Failed examples:
+
+rspec ./spec/features/user_features_spec.rb:5 # Feature Test: User Signup successfully signs up as non-admin
+rspec ./spec/features/user_features_spec.rb:17 # Feature Test: User Signup on sign up, successfully adds a session hash
+rspec ./spec/features/user_features_spec.rb:23 # Feature Test: User Signup successfully logs in as non-admin
+rspec ./spec/features/user_features_spec.rb:35 # Feature Test: User Signup on log in, successfully adds a session hash
+rspec ./spec/features/user_features_spec.rb:41 # Feature Test: User Signup prevents user from viewing user show page and redirects to home page if not logged in
+rspec ./spec/features/user_features_spec.rb:55 # Feature Test: User Signup successfully signs up as admin
+rspec ./spec/features/user_features_spec.rb:64 # Feature Test: User Signup on sign up for admin, successfully adds a session hash
+rspec ./spec/features/user_features_spec.rb:70 # Feature Test: User Signup successfully logs in as admin
+rspec ./spec/features/user_features_spec.rb:79 # Feature Test: User Signup on log in, successfully adds a session hash to admins
+rspec ./spec/features/user_features_spec.rb:89 # Feature Test: User Signout has a link to log out from the users/show page
+rspec ./spec/features/user_features_spec.rb:95 # Feature Test: User Signout redirects to home page after logging out
+rspec ./spec/features/user_features_spec.rb:102 # Feature Test: User Signout successfully destroys session hash when 'Log Out' is clicked
+rspec ./spec/features/user_features_spec.rb:109 # Feature Test: User Signout has a link to log out from the users/show page when user is an admin
+rspec ./spec/features/user_features_spec.rb:115 # Feature Test: User Signout redirects to home page after admin logs out when user is an admin
+rspec ./spec/features/user_features_spec.rb:122 # Feature Test: User Signout successfully destroys session hash when 'Log Out' is clicked as admin
+rspec ./spec/features/user_features_spec.rb:158 # Feature Test: Go on a Ride has a link from the user show page to the attractions index page
+rspec ./spec/features/user_features_spec.rb:163 # Feature Test: Go on a Ride links from the user show page to the attractions index page
+rspec ./spec/features/user_features_spec.rb:168 # Feature Test: Go on a Ride prevents users from editing/deleting/adding rides on the index page
+rspec ./spec/features/user_features_spec.rb:176 # Feature Test: Go on a Ride has titles of the rides on the attractions index page
+rspec ./spec/features/user_features_spec.rb:182 # Feature Test: Go on a Ride has links on the attractions index page to the attractions' show pages
+rspec ./spec/features/user_features_spec.rb:188 # Feature Test: Go on a Ride links from the attractions index page to the attractions' show pages
+rspec ./spec/features/user_features_spec.rb:194 # Feature Test: Go on a Ride prevents users from editing/deleting a ride on the show page
+rspec ./spec/features/user_features_spec.rb:201 # Feature Test: Go on a Ride has a button from the attraction show page to go on the ride
+rspec ./spec/features/user_features_spec.rb:208 # Feature Test: Go on a Ride clicking on 'Go on this ride' redirects to user show page
+rspec ./spec/features/user_features_spec.rb:215 # Feature Test: Go on a Ride clicking on 'Go on this ride' updates the users ticket number
+rspec ./spec/features/user_features_spec.rb:222 # Feature Test: Go on a Ride clicking on 'Go on this ride' updates the users mood
+rspec ./spec/features/user_features_spec.rb:229 # Feature Test: Go on a Ride when the user is tall enough and has enough tickets, clicking on 'Go on this ride' displays a thank you message
+rspec ./spec/features/user_features_spec.rb:236 # Feature Test: Go on a Ride when the user is too short, clicking on 'Go on this ride' displays a sorry message
+rspec ./spec/features/user_features_spec.rb:246 # Feature Test: Go on a Ride when the user doesn't have enough tickets, clicking on 'Go on this ride' displays a sorry message
+rspec ./spec/features/user_features_spec.rb:256 # Feature Test: Go on a Ride when the user is too short and doesn't have enough tickets, clicking on 'Go on this ride' displays a detailed sorry message
+rspec ./spec/features/user_features_spec.rb:296 # Feature Test: Admin Flow displays admin when logged in as an admin on user show page
+rspec ./spec/features/user_features_spec.rb:300 # Feature Test: Admin Flow links to the attractions from the users show page when logged in as a admin
+rspec ./spec/features/user_features_spec.rb:304 # Feature Test: Admin Flow has a link from the user show page to the attractions index page when in admin mode
+rspec ./spec/features/user_features_spec.rb:311 # Feature Test: Admin Flow allows admins to add an attraction from the index page
+rspec ./spec/features/user_features_spec.rb:316 # Feature Test: Admin Flow allows admins to add an attraction
+rspec ./spec/features/user_features_spec.rb:330 # Feature Test: Admin Flow has link to attraction/show from attraction/index page for admins
+rspec ./spec/features/user_features_spec.rb:335 # Feature Test: Admin Flow does not suggest that admins go on a ride
+rspec ./spec/features/user_features_spec.rb:340 # Feature Test: Admin Flow links to attractions/show page from attractions/index
+rspec ./spec/features/user_features_spec.rb:346 # Feature Test: Admin Flow does not suggest that an admin go on a ride from attractions/show page
+rspec ./spec/features/user_features_spec.rb:352 # Feature Test: Admin Flow has a link for admin to edit attraction from the attractions/show page
+rspec ./spec/features/user_features_spec.rb:358 # Feature Test: Admin Flow links to attraction/edit page from attraction/show page when logged in as an admin
+rspec ./spec/features/user_features_spec.rb:365 # Feature Test: Admin Flow updates an attraction when an admin edits it
+rspec ./spec/models/ride_spec.rb:41 # Ride has a method 'take_ride' that accounts for the user not having enough tickets
+rspec ./spec/models/ride_spec.rb:49 # Ride has a method 'take_ride' that accounts for the user not being tall enough
+rspec ./spec/models/ride_spec.rb:58 # Ride has a method 'take_ride' that accounts for the user not being tall enough and not having enough tickets
+rspec ./spec/models/user_spec.rb:55 # User is valid with an admin boolean
+rspec ./spec/models/user_spec.rb:59 # User defaults to admin => false
+
