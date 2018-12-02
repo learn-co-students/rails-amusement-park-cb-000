@@ -1,0 +1,15 @@
+<h1><%= @attraction.name %></h1>
+
+<%= admin_controls_for_show(@user, @attraction) %>
+
+<p><strong>Name: </strong><%= @attraction.name %></p>
+<p><strong>Minimum Height: </strong><%= @attraction.min_height %></p>
+<p><strong>Happiness Rating: </strong><%= @attraction.happiness_rating %></p>
+<p><strong>Nausea Rating: </strong><%= @attraction.nausea_rating %></p>
+<p><strong>Tickets: </strong><%= @attraction.tickets %></p>
+
+<%= form_tag '/rides' do %>
+  <%= hidden_field_tag 'ride[user_id]', @user.try(:id) %>
+  <%= hidden_field_tag 'ride[attraction_id]', @attraction.id %>
+  <%= submit_tag 'Go on this ride' %>
+<% end %>
