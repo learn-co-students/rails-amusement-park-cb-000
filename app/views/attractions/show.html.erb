@@ -1,1 +1,25 @@
 <h1><%= @attraction.name %></h1>
+
+<%= admin_controls_for_show(@user, @attraction) %>
+<%= form_for @attraction do |f| %>
+  <%= f.label :name %>
+  <%= @attraction.name %>
+  <br>
+  <%= f.label :min_height %>
+  <%= @attraction.min_height %>
+  <br>
+  <%= f.label :happiness_rating %>
+  <%= @attraction.happiness_rating %>
+  <br>
+  <%= f.label :nausea_rating %>
+  <%= @attraction.nausea_rating %>
+  <br>
+  <%= f.label :tickets %>
+  <%= @attraction.tickets %>
+<% end %>
+
+<%= form_tag '/rides' do %>
+  <%= hidden_field_tag 'ride[user_id]', @user.try(:id) %>
+  <%= hidden_field_tag 'ride[attraction_id]', @attraction.id %>
+  <%= submit_tag 'Go on this ride' %>
+<% end %>

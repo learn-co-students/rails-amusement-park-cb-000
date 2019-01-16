@@ -13,6 +13,7 @@ class Ride < ActiveRecord::Base
       return "Sorry. You are not tall enough to ride the #{@attraction.name}."
     else
       update_user
+      return ''
     end
   end
 
