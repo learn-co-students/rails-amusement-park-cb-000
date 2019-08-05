@@ -14,7 +14,7 @@ gem 'coffee-rails', '~> 4.0.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+# Build JSON APIs with ease. Read more: https://git.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
@@ -38,13 +38,14 @@ group :test, :development do
   gem "rspec-rails"
   gem "capybara"
   gem "selenium-webdriver"
-  gem "better_errors"
+  #gem "better_errors"
   gem "sprockets_better_errors"
   gem "binding_of_caller"
   gem "factory_girl_rails"
+  gem "factory_bot"
   gem "simplecov"
   gem "database_cleaner"
-  gem "sqlite3"
+  gem "sqlite3", "~> 1.3.6"
   gem "pry"
   gem "rack_session_access"
 end
