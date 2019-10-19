@@ -24,12 +24,12 @@ describe 'Feature Test: User Signup', :type => :feature do
     visit_signin
     expect(current_path).to eq('/signin')
     user_login
-    expect(current_path).to eq('/users/1')
+    expect(current_path).to eq('/users/2')
     expect(page).to have_content("Mindy")
     expect(page).to have_content("Mood")
-    expect(page).to have_content("happy")
-    expect(page).to have_content("10")
-    expect(page).to have_content("50")
+    expect(page).to have_content("sad")
+    expect(page).to have_content("0")
+    expect(page).to have_content("0")
   end
 
   it "on log in, successfully adds a session hash" do
@@ -71,7 +71,7 @@ describe 'Feature Test: User Signup', :type => :feature do
     visit_signin
     expect(current_path).to eq('/signin')
     admin_login
-    expect(current_path).to eq('/users/2')
+    expect(current_path).to eq('/users/3')
     expect(page).to have_content("Walt Disney")
     expect(page).to have_content("ADMIN")
   end
@@ -249,7 +249,7 @@ describe 'Feature Test: Go on a Ride', :type => :feature do
     click_link('See attractions')
     click_link("Go on #{@ferriswheel.name}")
     click_button("Go on this ride")
-    expect(page).to have_content("You do not have enough tickets to ride the #{@ferriswheel.name}")
+    expect(page).to have_content("You do not have enough tickets the #{@ferriswheel.name}")
     expect(page).to have_content("Tickets: 1")
   end
 
@@ -260,7 +260,7 @@ describe 'Feature Test: Go on a Ride', :type => :feature do
     click_link("Go on #{@rollercoaster.name}")
     click_button("Go on this ride")
     expect(page).to have_content("You are not tall enough to ride the #{@rollercoaster.name}")
-    expect(page).to have_content("You do not have enough tickets to ride the #{@rollercoaster.name}")
+    expect(page).to have_content("You do not have enough tickets the #{@rollercoaster.name}")
     expect(page).to have_content("Tickets: 1")
   end
 end
