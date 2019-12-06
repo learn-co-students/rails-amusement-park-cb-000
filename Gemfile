@@ -2,13 +2,13 @@ source 'https://rubygems.org'
 # ruby '2.2.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2'
+gem 'rails'
 # Use SCSS for stylesheets
-gem 'sass-rails', '4.0.2'
+gem 'sass-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
 
@@ -38,10 +38,11 @@ group :test, :development do
   gem "rspec-rails"
   gem "capybara"
   gem "selenium-webdriver"
-  gem "better_errors"
-  gem "sprockets_better_errors"
+  # gem "better_errors"
+  # gem "sprockets_better_errors"
   gem "binding_of_caller"
-  gem "factory_girl_rails"
+  # gem "factory_girl_rails"
+  gem "factory_bot_rails"
   gem "simplecov"
   gem "database_cleaner"
   gem "sqlite3"
@@ -50,7 +51,6 @@ group :test, :development do
 end
 
 group :production do
-  gem "pg"
   gem "google-analytics-rails"
   gem "rails_12factor"
 end
