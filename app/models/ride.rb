@@ -4,22 +4,22 @@ class Ride < ActiveRecord::Base
 
   def take_ride
     if not_enough_tickets? && not_enough_height?
-      'Sorry. ' + tickets_message + ' ' + height_message
+      'Sorry. ' + tickets_issue + ' ' + height_issue
     elsif not_enough_tickets?
-      'Sorry. ' + tickets_message
+      'Sorry. ' + tickets_issue
     elsif not_enough_height?
-      'Sorry. ' + height_message
+      'Sorry. ' + height_issue
     else
-      successful_ride
+      complete_ride
     end
   end
 
   private
-  def tickets_message
+  def tickets_issue
     "You do not have enough tickets to ride the #{attraction.name}."
   end
 
-  def height_message
+  def height_issue
     "You are not tall enough to ride the #{attraction.name}."
   end
 
@@ -31,7 +31,7 @@ class Ride < ActiveRecord::Base
     user.height < attraction.min_height
   end
 
-  def successful_ride
+  def complete_ride
     user.tickets -= attraction.tickets
     user.nausea += attraction.nausea_rating
     user.happiness += attraction.happiness_rating
