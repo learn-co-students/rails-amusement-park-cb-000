@@ -1,0 +1,4 @@
+<%= form_tag ride_user_path(current_user) do %>
+  <%= hidden_field_tag :attraction_id, @attraction.id %>
+  <%= button_tag 'Go on this ride', type: :submit %>
+<% end %>

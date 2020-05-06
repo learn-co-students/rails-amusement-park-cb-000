@@ -1,0 +1,7 @@
+<h1>Attractions</h1>
+
+<ul>
+  <% @attractions.each do |attraction| %>
+    <li><%= text_based_on_user(attraction) %></li>
+  <% end %>
+</ul>
