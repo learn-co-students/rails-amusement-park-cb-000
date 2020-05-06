@@ -1,0 +1,51 @@
+<h1>Sign Up</h1>
+<% if @user.errors.any? %>
+  <div class="errors">
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for @user do |form| %>
+  <div class="field">
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :height %><br>
+    <%= form.text_field :height %>
+  </div>
+
+  <div class="field">
+    <%= form.label :happiness %><br>
+    <%= form.text_field :happiness %>
+  </div>
+
+  <div class="field">
+    <%= form.label :nausea %><br>
+    <%= form.text_field :nausea %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tickets %><br>
+    <%= form.text_field :tickets %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password %><br>
+    <%= form.password_field :password %>
+  </div>
+
+  <div class="field">
+    <%= form.check_box :admin %>
+    <%= form.label :admin %> 
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

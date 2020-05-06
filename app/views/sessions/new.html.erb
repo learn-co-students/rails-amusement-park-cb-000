@@ -1,0 +1,23 @@
+<h1>Sign In</h1>
+
+<% if flash[:error].present? %>
+  <div class="errors">
+    <p><%= flash[:error] %></p>
+  </div>
+<% end %>
+
+<%= form_for @user, url: sessions_path do |form| %>
+  <div class="field">
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password %><br>
+    <%= form.password_field :password %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Sign In' %>
+  </div>
+<% end %>

@@ -1,0 +1,8 @@
+<h1><%= @attraction.name %></h1>
+
+<% if current_user.admin? %>
+  <h2><%= link_to 'Edit Attraction', edit_attraction_path(@attraction) %></h2>
+  <h2><%= link_to 'Delete', attraction_path(@attraction), method: :delete %></h2>
+<% else %>
+  <%= render 'ride_form' %>
+<% end %>
