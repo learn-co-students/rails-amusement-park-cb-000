@@ -1,0 +1,50 @@
+<%= tag.div class: "center" do %>
+  <%= tag.div class: "pic" do %>
+    <%= image_tag("http://www.allthingsclipart.com/05/amusement.park.05.jpg", height: 250) %>
+  <% end %>
+
+  <%= tag.div do %>
+    <%= form_with url: new_ride_path do |f| %>
+      <%= f.hidden_field(:user_id, value: current_user.id) %>
+      <%= f.hidden_field(:attraction_id, value: @attraction.id) %>
+
+      <%= f.submit "Go on this ride" %>
+    <% end %>
+  <% end %>
+
+  <%= tag.div class: "info" do %>
+    <%= tag.p do %>
+      <%= tag.strong "Name:" %>
+      <%= @attraction.name %>
+    <% end %>
+
+    <%= tag.p do %>
+      <%= tag.strong "Total Number of Users:" %>
+      <%= @attraction.users.count %>
+    <% end %>
+
+    <%= tag.p do %>
+      <%= tag.strong "Ticket Requirement:" %>
+      <%= @attraction.tickets %>
+    <% end %>
+
+    <%= tag.p do %>
+      <%= tag.strong "Height Requirement:" %>
+      <%= @attraction.min_height %>
+    <% end %>
+
+    <%= tag.p do %>
+      <%= tag.strong "Nausea Rating:" %>
+      <%= @attraction.nausea_rating %>
+    <% end %>
+
+    <%= tag.p do %>
+      <%= tag.strong "Happiness Rating:" %>
+      <%= @attraction.happiness_rating %>
+    <% end %>
+
+    <%= tag.p do %>
+      <%= link_to "Edit Attraction", edit_attraction_path %>
+    <% end %>
+  <% end %>
+<% end %> 

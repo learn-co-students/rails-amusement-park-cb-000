@@ -1,0 +1,33 @@
+<%= tag.h1 "Listing attractions" %>
+
+<%= tag.div do %>
+  <% if current_user.admin %>
+    <%= link_to "New Attraction", new_attraction_path %>
+  <% end %>
+<% end %>
+
+<%= tag.table do %>
+  <%= tag.tr do %>
+    <%= tag.td tag.strong "Picture" %>
+    <%= tag.td tag.strong "Name" %>
+    <%= tag.td tag.strong "Tickets" %>
+    <%= tag.td tag.strong "Details" %>
+  <% end %>
+
+  <% @attractions.each do |attraction| %>
+    <%= tag.tr do %>
+      <%= tag.td tag.strong do %>
+        <%= image_tag("http://www.allthingsclipart.com/05/amusement.park.05.jpg", width: 100) %>
+      <% end %>
+      <%= tag.td tag.strong attraction.name %>
+      <%= tag.td tag.strong attraction.tickets %>
+      <%= tag.td tag.strong do %>
+        <% if current_user.admin %>
+          <%= link_to "Show #{attraction.name}", attraction_path(attraction.id) %>
+        <% else %>
+          <%= link_to "Go on #{attraction.name}", attraction_path(attraction.id) %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %> 

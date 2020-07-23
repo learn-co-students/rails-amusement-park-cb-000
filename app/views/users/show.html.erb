@@ -1,0 +1,39 @@
+<%= tag.div(class: "center alert") do %>
+  <%= flash[:message] if flash[:message] %>
+<% end %>
+
+<%= tag.div class: "center" do %>
+  <%= tag.div class: "info" do %>
+    <%= tag.p do %>
+      <%= tag.strong "ADMIN" if @user.admin %>
+    <% end %>
+
+    <%= tag.p do %>
+      <%= tag.strong "Name:" %>
+      <%= @user.name %>
+    <% end %>
+
+    <%= tag.p do %>
+      <%= tag.strong "Tickets:" %>
+      <%= @user.tickets %>
+    <% end %>
+
+    <%= tag.p do %>
+      <%= tag.strong "Mood:" %>
+      <%= @user.mood %>
+    <% end %>
+
+    <%= tag.p do %>
+      <%= tag.strong "Height:" %>
+      <%= @user.height %>
+    <% end %>
+
+    <%= tag.p do %>
+      <%= link_to "Edit", edit_user_path %>
+    <% end %>
+
+    <%= tag.p do %>
+      <%= link_to "See attractions", attractions_path %>
+    <% end %>
+  <% end %>
+<% end %> 
